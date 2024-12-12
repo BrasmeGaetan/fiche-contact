@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+    //Deebut de la Route
     #[Route('/contact', name: 'contact')]
     public function index(Request $request, \Symfony\Component\Mailer\MailerInterface $mailer): Response
     {
@@ -22,10 +23,10 @@ class ContactController extends AbstractController
             // Envoi de l'email
             $email = (new \Symfony\Component\Mime\Email())
                 ->from($data['email'])
-                ->to('responsable@' . strtolower($data['departement']->getNom()) . '.com') // Exemple d'email
+                ->to('responsable@entreprise.com')// Exemple d'email simple
                 ->subject('Nouvelle fiche contact')
                 ->text(sprintf(
-                    "Nom : %s\nPrénom : %s\nEmail : %s\nMessage : %s",
+                    "Nom : %s\nPrénom : %s\nEmail : %s\nMessage : %s", // J'utilise ces placesholders pour les inserer dans la chaine  et j'utlise %s qui sera remplacer par les variables fournies dans l'ordre
                     $data['nom'],
                     $data['prenom'],
                     $data['email'],
@@ -42,4 +43,7 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    //Fin de la Route 
+
+
 }
